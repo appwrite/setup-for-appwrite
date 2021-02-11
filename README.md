@@ -30,7 +30,3 @@ Great! Now you're all set to use the Appwrite CLI. You can access your CLI using
 ```
 
 You can read more about the CLI [here](https://appwrite.io/docs/command-line) and our [docs](https://appwrite.io/docs).
-
-## License
-
-Please see the [BSD-3-Clause license](https://raw.githubusercontent.com/appwrite/appwrite/master/LICENSE) file for more information.
