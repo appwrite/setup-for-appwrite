@@ -29,4 +29,4 @@ Great! Now you're all set to use the Appwrite CLI. You can access your CLI using
   run: appwrite users list
 ```
 
-You can read more about the CLI [here](https://appwrite.io/docs/command-line) and our [docs](https://appwrite.io/docs).
+You can read more about the CLI [here](https://appwrite.io/docs/command-line) andin our [docs](https://appwrite.io/docs).
