@@ -3,8 +3,6 @@
 ![License](https://img.shields.io/github/license/appwrite/setup-for-actions.svg?v=1)
 ![Version](https://img.shields.io/badge/api%20version-0.7.0-blue.svg?v=1)
 
-**This Action is compatible with Appwrite server version 0.7.0. For older versions, please check [previous releases](https://github.com/appwrite/setup-for-actions/releases).**
-
 Appwrite is an open-source backend as a service server that abstract and simplify complex and repetitive development tasks behind a very simple to use REST API. Appwrite aims to help you develop your apps faster and in a more secure way.
 Use the CLI to integrate your CI with the Appwrite server to easily start interacting with all of Appwrite backend APIs and tools.
 For full API documentation and tutorials go to [https://appwrite.io/docs](https://appwrite.io/docs)
