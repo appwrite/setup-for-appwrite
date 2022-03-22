@@ -26,4 +26,3 @@ runs:
           --endpoint='${{ inputs.endpoint }}' \
           --projectId='${{ inputs.project }}' \
           --key='${{ inputs.key }}'
-        appwrite version
