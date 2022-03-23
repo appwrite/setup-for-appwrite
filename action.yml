@@ -13,10 +13,6 @@ inputs:
   key:
     description: 'API Key'
     required: true
-  locale:
-    description: 'Locale'
-    required: false
-    default: 'en-US'
 runs:
   using: 'composite'
   steps:
@@ -26,9 +22,7 @@ runs:
     - name: Setup Appwrite CLI
       shell: bash
       run: |
-        appwrite init \
-          --locale='${{ inputs.locale }}' \
+        appwrite client \
           --endpoint='${{ inputs.endpoint }}' \
-          --project='${{ inputs.project }}' \
+          --projectId='${{ inputs.project }}' \
           --key='${{ inputs.key }}'
-        appwrite version
