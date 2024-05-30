@@ -6,23 +6,67 @@ branding:
 inputs:
   endpoint:
     description: 'Appwrite Endpoint'
-    required: true
+    default: "https://cloud.appwrite.io/v1"
+    required: false
+  method:
+    required: false
+    description: |-
+      Enter the login method to your Appwrite instance, available options
+      - email
+      - key
+      
+      When using email you'll need to pass email and password
+      ```yaml
+       - name: Appwrite action
+         uses: appwrite/setup-for-actions@v2
+          with:
+            method: email
+            email: ${{ secrets.EMAIL }}
+            password: ${{ secrets.PASSWORD }}
+      ```
+      
+      When using key you'll need to pass the API key and project ID
+      ```yaml
+       - name: Appwrite action
+         uses: appwrite/setup-for-actions@v2
+          with:
+            method: key
+            key: ${{ secrets.API_KEY }}
+            project: ${{ vars.PROJECT_ID }}
+            self_signed: true
+      ```
+  email:
+    description: 'User email'
+    required: false
+  password:
+    description: 'User password'
+    required: false
   project:
     description: 'Project ID'
-    required: true
+    required: false
   key:
     description: 'API Key'
-    required: true
+    required: false
+  self_signed:
+    description: 'Whether you are using a self-signed, local certificate'
+    required: false
+  force:
+    description: "When set to `true`, push or pull actions will have the `--force` flag"
+    default: "false"
+    required: false
+  all:
+    description: "When set to `true`, push or pull actions will have the `--all` flag"
+    default: "false"
+    required: false
+  actions:
+    required: false
+    description: |-
+      List of appwrite actions to execute, you can use write the command with or without the leading `appwrite`
+      ```yaml
+      actions: |-
+          appwrite push functions
+          push collections       
+      ```
 runs:
-  using: 'composite'
-  steps:
-    - name: Install Appwrite CLI
-      shell: bash
-      run: curl -sL https://appwrite.io/cli/install.sh | bash
-    - name: Setup Appwrite CLI
-      shell: bash
-      run: |
-        appwrite client \
-          --endpoint='${{ inputs.endpoint }}' \
-          --projectId='${{ inputs.project }}' \
-          --key='${{ inputs.key }}'
+  using: 'node20'
+  main: 'dist/index.js'

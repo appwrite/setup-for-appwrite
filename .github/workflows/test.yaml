@@ -1,0 +1,30 @@
+name: Test
+
+on:
+#  pull_request:
+
+jobs:
+  test:
+    name: Test action
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - uses: ./
+        with:
+          method: email
+          email: ${{ secrets.EMAIL }}
+          password: ${{ secrets.PASSWORD }}
+          actions: |-
+            whoami
+      - uses: ./
+        with:
+          method: key
+          key: ${{ secrets.API_KEY }}
+          project: ${{ secrets.PROJECT_ID }}
+          self_signed: true
+          force: true
+          all: true
+          actions: |-
+            pull all 
+            push functions
