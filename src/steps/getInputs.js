@@ -23,7 +23,7 @@ export function getInputs() {
     inputs.password = core.getInput('password');
 
     if (!inputs.email || !inputs.password) {
-      core.error('email and password are require when using the email login method');
+      core.setFailed('email and password are require when using the email login method');
       return null;
     }
   }
