@@ -10,31 +10,7 @@ inputs:
     required: false
   method:
     required: false
-    description: |-
-      Enter the login method to your Appwrite instance, available options
-      - email
-      - key
-      
-      When using email you'll need to pass email and password
-      ```yaml
-       - name: Appwrite action
-         uses: appwrite/setup-for-actions@v2
-          with:
-            method: email
-            email: ${{ secrets.EMAIL }}
-            password: ${{ secrets.PASSWORD }}
-      ```
-      
-      When using key you'll need to pass the API key and project ID
-      ```yaml
-       - name: Appwrite action
-         uses: appwrite/setup-for-actions@v2
-          with:
-            method: key
-            key: ${{ secrets.API_KEY }}
-            project: ${{ vars.PROJECT_ID }}
-            self_signed: true
-      ```
+    description: "Login method either `key` or `email`"
   email:
     description: 'User email'
     required: false
