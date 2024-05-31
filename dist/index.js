@@ -27868,24 +27868,197 @@ module.exports = parseParams
 
 /***/ }),
 
+/***/ 1263:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ RunCommand)
+});
+
+;// CONCATENATED MODULE: ./src/helpers/ExecOutput.js
+class ExecOutput {
+  stdout = '';
+  exitCode = 0;
+}
+
+// EXTERNAL MODULE: ./node_modules/@actions/exec/lib/exec.js
+var exec = __nccwpck_require__(1514);
+;// CONCATENATED MODULE: ./src/helpers/RunCommand.js
+
+
+
+class RunCommand {
+  static async run(command, args = []) {
+    const result = new ExecOutput();
+    const stdout = [];
+
+    const listeners = {
+      stdout: (data) => {
+        stdout.push(data.toString());
+      },
+      stderr: (data) => {
+        stdout.push(data.toString());
+      }
+    };
+
+    result.exitCode = await exec.exec(command, args, { listeners, silent: true, ignoreReturnCode: true });
+    result.stdout = stdout.join('');
+
+    return result;
+  }
+}
+
+
+/***/ }),
+
 /***/ 7633:
 /***/ ((__webpack_module__, __unused_webpack___webpack_exports__, __nccwpck_require__) => {
 
 __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
 /* harmony import */ var _steps_install_appwrite_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(5340);
+/* harmony import */ var _steps_testing_appwrite_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1160);
+/* harmony import */ var _steps_getInputs_js__WEBPACK_IMPORTED_MODULE_3__ = __nccwpck_require__(9481);
+/* harmony import */ var _steps_run_actions_js__WEBPACK_IMPORTED_MODULE_4__ = __nccwpck_require__(3342);
+/* harmony import */ var _steps_login_email_js__WEBPACK_IMPORTED_MODULE_5__ = __nccwpck_require__(8130);
+/* harmony import */ var _steps_login_api_js__WEBPACK_IMPORTED_MODULE_6__ = __nccwpck_require__(7978);
+
+
+
+
+
 
 
 
 async function run() {
-  await (0,_steps_install_appwrite_js__WEBPACK_IMPORTED_MODULE_1__/* .installAppwrite */ .$)();
+  if (await (0,_steps_install_appwrite_js__WEBPACK_IMPORTED_MODULE_1__/* .installAppwrite */ .$)() !== 0) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Can't install Appwrite CLI`);
+    return;
+  }
 
+  if (await (0,_steps_testing_appwrite_js__WEBPACK_IMPORTED_MODULE_2__/* .testingAppwrite */ .Z)() !== 0) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Appwrite CLI is not available`);
+    return;
+  }
+
+  const inputs = (0,_steps_getInputs_js__WEBPACK_IMPORTED_MODULE_3__/* .getInputs */ .G)();
+  if (inputs === null || !inputs.method) {
+    return;
+  }
+
+  if (inputs.method === 'key') {
+    if (await (0,_steps_login_api_js__WEBPACK_IMPORTED_MODULE_6__/* .loginApi */ .l)(inputs.key, inputs.project, inputs.endpoint, inputs.selfSigned) !== 0) {
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Appwrite CLI was unable to log in using the provided credentials`);
+      return;
+    }
+  } else {
+    if (await (0,_steps_login_email_js__WEBPACK_IMPORTED_MODULE_5__/* .loginEmail */ .N)(inputs.email, inputs.password, inputs.endpoint) !== 0) {
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Appwrite CLI was unable to log in using the provided credentials`);
+      return;
+
+    }
+  }
+
+  if (inputs.actions.length !== 0) {
+    const num = await (0,_steps_run_actions_js__WEBPACK_IMPORTED_MODULE_4__/* .runActions */ .X)(inputs.actions);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Successfully executed ${num} actions`);
+  }
 }
 
 await run();
 
 __webpack_async_result__();
 } catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ 9481:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  "G": () => (/* binding */ getInputs)
+});
+
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __nccwpck_require__(2186);
+;// CONCATENATED MODULE: ./src/models/Inputs.js
+class Inputs {
+  endpoint = '';
+  method = '';
+  email = '';
+  password = '';
+  project = '';
+  key = '';
+  selfSigned =false;
+  force = false;
+  all = false;
+  actions = [];
+}
+
+;// CONCATENATED MODULE: ./src/steps/getInputs.js
+
+
+
+
+function getInputs() {
+  core.info('Getting inputs');
+  const inputs = new Inputs();
+
+  inputs.endpoint = core.getInput('endpoint');
+  inputs.method = core.getInput('method');
+
+  if (inputs.method === 'key') {
+    inputs.project = core.getInput('project');
+    inputs.key = core.getInput('key');
+    inputs.selfSigned = core.getInput('self_signed').toString() === 'true';
+
+    if (!inputs.key || !inputs.project) {
+      core.error('project and key are require when using the key login method');
+      return null;
+    }
+  } else {
+    inputs.email = core.getInput('email');
+    inputs.password = core.getInput('password');
+
+    if (!inputs.email || !inputs.password) {
+      core.error('email and password are require when using the email login method');
+      return null;
+    }
+  }
+
+  inputs.force = core.getInput('force').toString() === 'true';
+  inputs.all = core.getInput('all').toString() === 'true';
+
+  const actions = core.getInput('actions');
+
+  if (actions.length > 0) {
+    inputs.actions = actions.split(/\r\n|\r|\n/g).map((action) => {
+      if (action.search(/appwrite/) === 0) {
+        action = action.replace('appwrite', '');
+      }
+
+      if (action.search(/pull|push/) === 0) {
+        if (!action.includes('--all') && !action.includes('-a') && inputs.all) {
+          action += ' --all';
+        }
+
+        if (!action.includes('--force') && !action.includes('-f') && inputs.all) {
+          action += ' --force';
+        }
+      }
+
+
+      return action;
+    });
+  }
+
+  return inputs;
+}
+
 
 /***/ }),
 
@@ -27897,14 +28070,129 @@ __webpack_async_result__();
 /* harmony export */ });
 /* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
+
+
 
 
 
 async function installAppwrite() {
   _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Installing Appwrite');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite-cli-beta@0.16.0b35b4bb46a448d7115c16b43031a1ddd2fa28982']);
 
-  // result.exitCode = await exec().exec(`"${this.gitPath}"`, args, options);
-  // result.stdout = stdout.join('');
+  return res.exitCode;
+}
+
+
+/***/ }),
+
+/***/ 7978:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "l": () => (/* binding */ loginApi)
+/* harmony export */ });
+/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
+
+
+
+
+
+async function loginApi(key, project, endpoint, selfSigned) {
+  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Login using API key and project ID');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['client', '--endpoint', endpoint, '--projectId', project, '--key', key, '--selfSigned', selfSigned.toString()]);
+
+  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
+
+  return res.exitCode;
+}
+
+
+/***/ }),
+
+/***/ 8130:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "N": () => (/* binding */ loginEmail)
+/* harmony export */ });
+/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
+
+
+
+
+
+async function loginEmail(email, password, endpoint) {
+  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Login using email and password');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['login', '--email', email, '--password', password, '--endpoint', endpoint]);
+  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
+
+  return res.exitCode;
+}
+
+
+/***/ }),
+
+/***/ 3342:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "X": () => (/* binding */ runActions)
+/* harmony export */ });
+/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
+
+
+
+
+
+async function runActions(actions) {
+  let numberOfSuccessActions = 0;
+
+  for (const action of actions) {
+    const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', action.split(' '));
+    console.log(res);
+    _actions_core__WEBPACK_IMPORTED_MODULE_1__.info();
+    if (res.exitCode === 0) {
+      numberOfSuccessActions++;
+    }
+  }
+
+  return numberOfSuccessActions;
+
+}
+
+
+/***/ }),
+
+/***/ 1160:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ testingAppwrite)
+/* harmony export */ });
+/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
+
+
+
+
+
+
+async function testingAppwrite() {
+  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Testing Appwrite');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['-v']);
+  if(res.exitCode === 0) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(`Using Appwrite version ${res.stdout}`);
+  }
+
+  return res.exitCode;
 }
 
 
