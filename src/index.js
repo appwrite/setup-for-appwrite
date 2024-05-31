@@ -8,12 +8,12 @@ import { loginApi } from './steps/login-api.js';
 
 async function run() {
   if (await installAppwrite() !== 0) {
-    core.error(`Can't install Appwrite CLI`);
+    core.setFailed(`Can't install Appwrite CLI`);
     return;
   }
 
   if (await testingAppwrite() !== 0) {
-    core.error(`Appwrite CLI is not available`);
+    core.setFailed(`Appwrite CLI is not available`);
     return;
   }
 
@@ -24,12 +24,12 @@ async function run() {
 
   if (inputs.method === 'key') {
     if (await loginApi(inputs.key, inputs.project, inputs.endpoint, inputs.selfSigned) !== 0) {
-      core.error(`Appwrite CLI was unable to log in using the provided credentials`);
+      core.setFailed(`Appwrite CLI was unable to log in using the provided credentials`);
       return;
     }
   } else {
     if (await loginEmail(inputs.email, inputs.password, inputs.endpoint) !== 0) {
-      core.error(`Appwrite CLI was unable to log in using the provided credentials`);
+      core.setFailed(`Appwrite CLI was unable to log in using the provided credentials`);
       return;
 
     }

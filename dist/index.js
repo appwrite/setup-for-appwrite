@@ -27934,12 +27934,12 @@ __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependen
 
 async function run() {
   if (await (0,_steps_install_appwrite_js__WEBPACK_IMPORTED_MODULE_1__/* .installAppwrite */ .$)() !== 0) {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Can't install Appwrite CLI`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Can't install Appwrite CLI`);
     return;
   }
 
   if (await (0,_steps_testing_appwrite_js__WEBPACK_IMPORTED_MODULE_2__/* .testingAppwrite */ .Z)() !== 0) {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Appwrite CLI is not available`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Appwrite CLI is not available`);
     return;
   }
 
@@ -27950,12 +27950,12 @@ async function run() {
 
   if (inputs.method === 'key') {
     if (await (0,_steps_login_api_js__WEBPACK_IMPORTED_MODULE_6__/* .loginApi */ .l)(inputs.key, inputs.project, inputs.endpoint, inputs.selfSigned) !== 0) {
-      _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Appwrite CLI was unable to log in using the provided credentials`);
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Appwrite CLI was unable to log in using the provided credentials`);
       return;
     }
   } else {
     if (await (0,_steps_login_email_js__WEBPACK_IMPORTED_MODULE_5__/* .loginEmail */ .N)(inputs.email, inputs.password, inputs.endpoint) !== 0) {
-      _actions_core__WEBPACK_IMPORTED_MODULE_0__.error(`Appwrite CLI was unable to log in using the provided credentials`);
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__.setFailed(`Appwrite CLI was unable to log in using the provided credentials`);
       return;
 
     }
