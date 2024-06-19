@@ -26,5 +26,5 @@ jobs:
           force: true
           all: true
           actions: |-
-            pull all 
-            push functions
+            pull functions --all --force 
+            push functions --all --force --async
