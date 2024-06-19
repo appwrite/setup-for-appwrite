@@ -5,7 +5,7 @@ import RunCommand from '../helpers/RunCommand.js';
 
 export async function installAppwrite() {
   core.info('Installing Appwrite');
-  const res = await RunCommand.run('npm', ['install', '-g', 'appwrite-cli-beta@0.16.0b35b4bb46a448d7115c16b43031a1ddd2fa28982']);
+  const res = await RunCommand.run('npm', ['install', '-g', 'appwrite-cli-beta@0.16.0-a5d86a7aac8694c89da5fc4656c40a78e6716bc8']);
 
   return res.exitCode;
 }
