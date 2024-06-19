@@ -28078,7 +28078,7 @@ function getInputs() {
 
 async function installAppwrite() {
   _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Installing Appwrite');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite-cli-beta@0.16.0b35b4bb46a448d7115c16b43031a1ddd2fa28982']);
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite-cli-beta@0.16.0-a5d86a7aac8694c89da5fc4656c40a78e6716bc8']);
 
   return res.exitCode;
 }
@@ -28156,7 +28156,6 @@ async function runActions(actions) {
 
   for (const action of actions) {
     const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', action.split(' '));
-    console.log(res);
     _actions_core__WEBPACK_IMPORTED_MODULE_1__.info();
     if (res.exitCode === 0) {
       numberOfSuccessActions++;
