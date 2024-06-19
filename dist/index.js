@@ -28156,7 +28156,7 @@ async function runActions(actions) {
 
   for (const action of actions) {
     const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', action.split(' '));
-    _actions_core__WEBPACK_IMPORTED_MODULE_1__.info();
+    _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
     if (res.exitCode === 0) {
       numberOfSuccessActions++;
     }

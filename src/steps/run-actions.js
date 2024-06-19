@@ -8,7 +8,7 @@ export async function runActions(actions) {
 
   for (const action of actions) {
     const res = await RunCommand.run('appwrite', action.split(' '));
-    core.info();
+    core.info(res.stdout);
     if (res.exitCode === 0) {
       numberOfSuccessActions++;
     }
