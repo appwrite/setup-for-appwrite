@@ -28078,7 +28078,7 @@ function getInputs() {
 
 async function installAppwrite() {
   _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Installing Appwrite');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite-cli-beta@0.16.0-a5d86a7aac8694c89da5fc4656c40a78e6716bc8']);
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite']);
 
   return res.exitCode;
 }
@@ -28102,7 +28102,7 @@ async function installAppwrite() {
 
 async function loginApi(key, project, endpoint, selfSigned) {
   _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Login using API key and project ID');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['client', '--endpoint', endpoint, '--projectId', project, '--key', key, '--selfSigned', selfSigned.toString()]);
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['client', '--endpoint', endpoint, '--project-id', project, '--key', key, '--self-signed', selfSigned.toString()]);
 
   _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
 

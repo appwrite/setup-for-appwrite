@@ -1,5 +1,5 @@
 {
-  "name": "setup-for-actions",
+  "name": "setup-for-appwrite",
   "version": "2.0.0",
   "license": "MIT",
   "description": "GitHub action for setup Appwrite CLI and login using API key or email and password",
@@ -23,6 +23,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/appwrite/setup-for-actions.git"
+    "url": "https://github.com/appwrite/setup-for-appwrite.git"
   }
 }

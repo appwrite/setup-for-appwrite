@@ -2,7 +2,7 @@
 
 ![banner.png](assets/banner.png)
 
-![License](https://img.shields.io/github/license/appwrite/setup-for-actions.svg?v=1)
+![License](https://img.shields.io/github/license/appwrite/setup-for-appwrite.svg?v=1)
 ![Version](https://img.shields.io/badge/api%20version-1.5.6-blue.svg?v=1)
 
 Appwrite is an open-source backend as a service server that abstracts and simplifies complex and repetitive development tasks behind a very simple to use REST API. Appwrite aims to help you develop your apps faster and in a more secure way.
@@ -40,7 +40,7 @@ When using email, you'll need to pass email and password
 
 ```yaml
  - name: Appwrite action
-   uses: appwrite/setup-for-actions@v2
+   uses: appwrite/setup-for-appwrite@v2
      with:
        method: email
        email: ${{ secrets.EMAIL }}
@@ -51,7 +51,7 @@ When using key you'll need to pass the API key and project ID
 
 ```yaml
  - name: Appwrite action
-   uses: appwrite/setup-for-actions@v2
+   uses: appwrite/setup-for-appwrite@v2
      with:
        method: key
        key: ${{ secrets.API_KEY }}
@@ -128,7 +128,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup Appwrite
-        uses: appwrite/setup-for-actions@v2
+        uses: appwrite/setup-for-appwrite@v2
       - name: List users
         run: appwrite users list
 ```
@@ -149,7 +149,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup Appwrite
-        uses: appwrite/setup-for-actions@v2
+        uses: appwrite/setup-for-appwrite@v2
         with:
           method: email
           email: ${{ secrets.EMAIL }}
