@@ -28068,17 +28068,14 @@ function getInputs() {
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   "$": () => (/* binding */ installAppwrite)
 /* harmony export */ });
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
-/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
-
-
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1263);
 
 
 
 async function installAppwrite() {
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Installing Appwrite');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite']);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Installing Appwrite');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite']);
 
   return res.exitCode;
 }
@@ -28092,19 +28089,16 @@ async function installAppwrite() {
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   "l": () => (/* binding */ loginApi)
 /* harmony export */ });
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
-/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
-
-
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1263);
 
 
 
 async function loginApi(key, project, endpoint, selfSigned) {
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Login using API key and project ID');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['client', '--endpoint', endpoint, '--project-id', project, '--key', key, '--self-signed', selfSigned.toString()]);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Login using API key and project ID');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('appwrite', ['client', '--endpoint', endpoint, '--project-id', project, '--key', key, '--self-signed', selfSigned.toString()]);
 
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(res.stdout);
 
   return res.exitCode;
 }
@@ -28118,18 +28112,15 @@ async function loginApi(key, project, endpoint, selfSigned) {
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   "N": () => (/* binding */ loginEmail)
 /* harmony export */ });
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
-/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
-
-
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1263);
 
 
 
 async function loginEmail(email, password, endpoint) {
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Login using email and password');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['login', '--email', email, '--password', password, '--endpoint', endpoint]);
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Login using email and password');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('appwrite', ['login', '--email', email, '--password', password, '--endpoint', endpoint]);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(res.stdout);
 
   return res.exitCode;
 }
@@ -28143,11 +28134,8 @@ async function loginEmail(email, password, endpoint) {
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   "X": () => (/* binding */ runActions)
 /* harmony export */ });
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
-/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
-
-
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1263);
 
 
 
@@ -28155,8 +28143,8 @@ async function runActions(actions) {
   let numberOfSuccessActions = 0;
 
   for (const action of actions) {
-    const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', action.split(' '));
-    _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(res.stdout);
+    const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('appwrite', action.split(' '));
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(res.stdout);
     if (res.exitCode === 0) {
       numberOfSuccessActions++;
     }
@@ -28175,20 +28163,17 @@ async function runActions(actions) {
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (/* binding */ testingAppwrite)
 /* harmony export */ });
-/* harmony import */ var _actions_exec__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(1514);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(2186);
-/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(1263);
-
-
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(1263);
 
 
 
 
 async function testingAppwrite() {
-  _actions_core__WEBPACK_IMPORTED_MODULE_1__.info('Testing Appwrite');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"].run */ .Z.run('appwrite', ['-v']);
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Testing Appwrite');
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('appwrite', ['-v']);
   if(res.exitCode === 0) {
-    _actions_core__WEBPACK_IMPORTED_MODULE_1__.info(`Using Appwrite version ${res.stdout}`);
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__.info(`Using Appwrite version ${res.stdout}`);
   }
 
   return res.exitCode;
