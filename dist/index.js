@@ -28075,7 +28075,7 @@ function getInputs() {
 
 async function installAppwrite() {
   _actions_core__WEBPACK_IMPORTED_MODULE_0__.info('Installing Appwrite');
-  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite']);
+  const res = await _helpers_RunCommand_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"].run */ .Z.run('npm', ['install', '-g', 'appwrite-cli']);
 
   return res.exitCode;
 }
