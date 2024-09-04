@@ -1,0 +1,8 @@
+# artifacts
+dist/
+# unsupported formats
+yarn.lock
+.gitignore
+.prettierignore
+.npmrc
+.nvmrc
