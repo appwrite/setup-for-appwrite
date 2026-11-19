@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@vercel/ncc": "0.38.1",
-    "prettier": "1.19.1"
+    "prettier": "3.10.1"
   },
   "repository": {
     "type": "git",
